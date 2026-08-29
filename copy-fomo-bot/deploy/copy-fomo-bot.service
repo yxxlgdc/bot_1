@@ -1,0 +1,23 @@
+[Unit]
+Description=Copy-FOMO Bot (simulacion)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+# AJUSTA estas dos rutas a donde hayas puesto el proyecto en el servidor:
+WorkingDirectory=/home/USUARIO/copy-fomo-bot
+ExecStart=/home/USUARIO/copy-fomo-bot/.venv/bin/python -m src.main
+
+Restart=on-failure
+RestartSec=10
+
+# Usuario del sistema con el que corre el bot (evita usar root)
+User=USUARIO
+
+# Limites basicos de seguridad
+NoNewPrivileges=true
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target

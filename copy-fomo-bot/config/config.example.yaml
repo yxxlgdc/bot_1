@@ -1,0 +1,44 @@
+# Copia este archivo a config/config.yaml y rellena los datos.
+# NO subas config.yaml con claves reales a ningun repositorio publico.
+
+wallets:
+  solana:
+    - address: "498g1rVnFcnjBjpfw1xyqA1WvgQXUU8RWuELjxkjAayQ"
+      label: "fomo_solana_1"
+  bnb:
+    - address: "REPLACE_WITH_BNB_WALLET_ADDRESS"
+      label: "fomo_bnb_1"
+
+trading:
+  # "paper" = simulacion (sin dinero real). El modo "live" NO esta implementado
+  # en esta version por seguridad: hay que anadirlo deliberadamente (ver README).
+  mode: "paper"
+  starting_balance_usd: 500       # capital total inicial de la simulacion (la "banca")
+  capital_per_trade_usd: 100      # tamano MAXIMO de cada operacion; si queda menos banca que esto, se opera con lo que quede
+  take_profit_pct: 25             # vende (simulado) al +25%
+  stop_loss_pct: 30               # vende (simulado) al -30% para cortar perdidas
+  max_open_positions: 10          # limite de posiciones simuladas abiertas a la vez
+  ignore_tokens_bnb:               # tokens que NO se consideran "compra" en BNB Chain
+    - "0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095"  # WBNB
+    - "0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56"  # BUSD
+    - "0x55d398326f99059fF775485246999027B3197955"  # USDT (BSC)
+
+polling:
+  solana_interval_sec: 15
+  bnb_interval_sec: 15
+  price_check_interval_sec: 20
+  status_print_interval_sec: 60
+
+api:
+  # Solana: RPC publico funciona pero es lento/con rate limit. Se recomienda
+  # una key gratuita de Helius (https://www.helius.dev) para deteccion fiable
+  # de swaps. Si no se define, se usa el RPC publico con deteccion heuristica.
+  helius_api_key: ""
+  solana_rpc_url: "https://api.mainnet-beta.solana.com"
+
+  # BNB Chain: se necesita una API key gratuita de BscScan (https://bscscan.com/apis)
+  bscscan_api_key: ""
+
+logging:
+  trades_csv: "logs/trades.csv"
+  state_file: "logs/state.json"
